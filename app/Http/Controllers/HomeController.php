@@ -30,8 +30,8 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $task = Task::orderBy('id', 'DESC')->paginate(5);
+        $task = Task::where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->paginate(5);
+
         return view('tasks.index', compact('task'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -43,7 +43,7 @@ class HomeController extends Controller
 
     public function addTask(Request $request)
     {
-        
+
         $task = new Task;
 
         $this->validate(request(), [
@@ -71,30 +71,30 @@ class HomeController extends Controller
 
     public function editTask($id, Request $request)
     {
-        
+
         $this->validate(request(), [
             'name_task' => 'required|min:2',
             'description' => 'required|min:10',
             'assign' => 'required'
 
         ]);
-        
-        
+
+
         $task = Task::find($id);
-       
+
         $task->name = $request->name_task;
         $task->description = $request->description;
         $task->assign = $request->assign;
         $task->status = $request->status;
         $task->user_id = auth()->user()->id;
         $task->save();
-        
+
         return redirect('/home');
     }
 
     public function deleteTask($id)
     {
-        
+
         $task = Task::find($id);
         $task->delete();
 
