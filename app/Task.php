@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Auth\AuthManager;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model

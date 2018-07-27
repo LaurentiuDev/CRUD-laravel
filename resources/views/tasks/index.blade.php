@@ -19,8 +19,10 @@
             <th>Delete</th>
         </thead>
 
-        
+           
             @foreach($task as $value)
+            @if($value->user_id === auth()->user()->id)
+           
             <tr>
                 <td>{{++$i}}</td>
                 <td>{{$value->name}}</td>
@@ -42,6 +44,7 @@
                     </form>
                 </td>
             </tr>
+            @endif
             @endforeach
         
        
