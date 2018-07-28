@@ -6,11 +6,12 @@
         <h2 class="text-center">Create task</h2><br/>
         <form method="post" action="/add-task">
           {{csrf_field()}}
+          
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
-              <label for="name_task">Name task:</label>
-              <input type="text" class="form-control" name="name_task" required>
+              <label for="name">Name task:</label>
+              <input type="text" class="form-control" name="name" required>
             </div>
           </div>
 
@@ -35,6 +36,13 @@
             <div class="form-group col-md-4">
               <label for="assign">Assign:</label> 
               <input type="text" name="assign" class="form-control" required>   
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="form-group col-md-4">
+              <input type="hidden" name="user_id" value="{{auth()->user()->id}}" class="form-control" >   
            </div>
           </div>
           

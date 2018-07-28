@@ -47,19 +47,19 @@ class HomeController extends Controller
         $task = new Task;
 
         $this->validate(request(), [
-            'name_task' => 'required|min:2',
+            'name' => 'required|min:2',
             'description' => 'required|min:10',
             'assign' => 'required'
 
         ]);
 
-        Task::create([
-            'name' => request('name_task'),
-            'description' => request('description'),
-            'assign' => request('assign'),
-            'status' => request('status'),
-            'user_id' => auth()->user()->id
-        ]);
+        Task::create(request([
+            'name',
+            'description',
+            'assign',
+            'status',
+            'user_id'
+        ]));
 
         return Redirect('/home');
     }
@@ -73,7 +73,7 @@ class HomeController extends Controller
     {
 
         $this->validate(request(), [
-            'name_task' => 'required|min:2',
+            'name' => 'required|min:2',
             'description' => 'required|min:10',
             'assign' => 'required'
 
@@ -82,11 +82,11 @@ class HomeController extends Controller
 
         $task = Task::find($id);
 
-        $task->name = $request->name_task;
+        $task->name = $request->name;
         $task->description = $request->description;
         $task->assign = $request->assign;
         $task->status = $request->status;
-        $task->user_id = auth()->user()->id;
+        $task->user_id = $request->user_id;
         $task->save();
 
         return redirect('/home');
