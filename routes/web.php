@@ -23,5 +23,5 @@ Route::get('/add-button', 'HomeController@create');
 Route::post('/add-task', 'HomeController@addTask');
 
 Route::get('/edit-button/{id}', 'HomeController@edit');
-Route::get('/edit-task/{id}', 'HomeController@editTask');
+Route::put('/edit-task/{id}', 'HomeController@editTask');
 Route::delete('/delete-task/{id}', 'HomeController@deleteTask');

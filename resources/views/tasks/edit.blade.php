@@ -4,9 +4,9 @@
 
 <div class="container">
         <h2 class="text-center">Edit task</h2><br/>
-        <form method="PUT" action="/edit-task/{{$id}}">
+        <form method="post" action="/edit-task/{{$id}}" >
           {{csrf_field()}}
-          
+          {{ method_field('PUT') }}
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">

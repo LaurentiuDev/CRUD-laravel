@@ -69,7 +69,7 @@ class HomeController extends Controller
         return view('tasks.edit', compact('id'));
     }
 
-    public function editTask($id, Request $request)
+    public function editTask($id)
     {
 
         $this->validate(request(), [
@@ -82,11 +82,11 @@ class HomeController extends Controller
 
         $task = Task::find($id);
 
-        $task->name = $request->name;
-        $task->description = $request->description;
-        $task->assign = $request->assign;
-        $task->status = $request->status;
-        $task->user_id = $request->user_id;
+        $task->name = request('name');
+        $task->description = request('description');
+        $task->assign = request('assign');
+        $task->status = request('status');
+        $task->user_id = request('user_id');
         $task->save();
 
         return redirect('/home');

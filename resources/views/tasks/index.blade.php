@@ -28,10 +28,14 @@
                     <td>{{$value->status}}</td>
                     <td>{{$value->assign}}</td>
 
-                    <td>
-                        <a class="btn btn-primary btn-xs" href="/edit-button/{{$value->id}}" >
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </a>
+                    <td>             
+                        <form method="PUT" action="/edit-button/{{$value->id}}">
+                            {{ csrf_field() }}
+                            {{ method_field('PUT') }}
+                            <button type="submit"  class="btn btn-primary btn-xs"> 
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </form>
                     </td>
                     
                     <td>
