@@ -41,7 +41,7 @@ class HomeController extends Controller
         return view('tasks.create');
     }
 
-    public function addTask(Request $request)
+    public function addTask()
     {
 
         $task = new Task;

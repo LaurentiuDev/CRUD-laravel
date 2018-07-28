@@ -44,8 +44,15 @@
               <button type="submit" class="btn btn-success">Add task</button>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-4"></div>
+              <div class="form-group col-md-4">
+                @include('layouts.errors')
+              </div>
+         </div>
         </form>
-        @include('layouts.errors')
+       
       </div>
 
 @endsection
