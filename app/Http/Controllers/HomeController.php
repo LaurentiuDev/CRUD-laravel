@@ -34,13 +34,17 @@ class HomeController extends Controller
             ->orWhere('assign', auth()->user()->id)
             ->orderBy('id', 'DESC')->paginate(5);
 
+        $users = User::all();
+
         return view('tasks.index', compact('task'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 5)
+            ->with(compact('users'));
     }
 
     public function create()
     {
-        return view('tasks.create');
+        $users = User::all();
+        return view('tasks.create', compact('users'));
     }
 
     public function addTask()
@@ -68,6 +72,7 @@ class HomeController extends Controller
 
     public function edit($id)
     {
+
         return view('tasks.edit', compact('id'));
     }
 
@@ -90,6 +95,8 @@ class HomeController extends Controller
         $task->status = request('status');
         $task->user_id = request('user_id');
         $task->save();
+
+
 
         return redirect('/home')->with('message', 'The task was edited');
     }

@@ -35,7 +35,11 @@
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
               <label for="assign">Assign:</label> 
-              <input type="text" name="assign" class="form-control" required>   
+              <select name="assign" class="form-control">
+                  @foreach($users as $user)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                  @endforeach
+              </select>   
            </div>
           </div>
 

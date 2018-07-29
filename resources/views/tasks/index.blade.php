@@ -26,7 +26,11 @@
                     <td>{{$value->name}}</td>
                     <td>{{$value->description}}</td>
                     <td>{{$value->status}}</td>
-                    <td>{{$value->assign}}</td>
+                    @foreach($users as $user)
+                        @if($user->id === $value->assign)
+                            <td>{{$user->name}}</td>
+                        @endif
+                    @endforeach
 
                     <td>             
                         <form method="PUT" action="/edit-button/{{$value->id}}">
