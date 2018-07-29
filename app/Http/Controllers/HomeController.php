@@ -61,7 +61,7 @@ class HomeController extends Controller
             'user_id'
         ]));
 
-        return Redirect('/home');
+        return Redirect('/home')->with('message', 'Task is added .');
     }
 
     public function edit($id)
@@ -89,7 +89,7 @@ class HomeController extends Controller
         $task->user_id = request('user_id');
         $task->save();
 
-        return redirect('/home');
+        return redirect('/home')->with('message', 'Task is edited .');
     }
 
     public function deleteTask($id)

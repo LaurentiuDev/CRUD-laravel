@@ -53,5 +53,13 @@
     </table>
 
     {{$task->render()}}
+   
+    
 </div>
+@if(Session::has('message'))
+<div class="message-alert">
+    <span> {{session()->get('message')}}</span>
+</div>
+@endif
+
 @endsection 
