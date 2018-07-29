@@ -30,7 +30,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $task = Task::where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->paginate(5);
+        $task = Task::where('user_id', auth()->user()->id)
+            ->orWhere('assign', auth()->user()->id)
+            ->orderBy('id', 'DESC')->paginate(5);
 
         return view('tasks.index', compact('task'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
