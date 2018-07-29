@@ -9,7 +9,7 @@
   align-items: center;
   opacity: 0;
   justify-content: center;
-  animation: fade 2s;
+  animation: fade 2.5s;
 }
 
 @keyframes fade {
@@ -23,5 +23,3 @@
     opacity: 0;
   }
 }
-
-
