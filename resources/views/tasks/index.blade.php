@@ -13,23 +13,30 @@
             <th>Task</th> 
             <th>Description</th>
             <th>Status</th>
-            <th>Assign</th>
+            <th>Assign by</th>
             <th>Edit</th>
             <th>Delete</th>
         </thead>
 
             
             @foreach($task as $value)
-           
+                @if($value->assign === auth()->user()->id)
                 <tr>
                     <td>{{++$i}}</td>
                     <td>{{$value->name}}</td>
                     <td>{{$value->description}}</td>
                     <td>{{$value->status}}</td>
                     @foreach($users as $user)
-                        @if($user->id === $value->assign)
-                            <td>{{$user->name}}</td>
+                        @if($user->id === $value->user_id)
+                            @if($value->user_id === auth()->user()->id)
+                                <td>You</td>
+                                @break
+                            @else
+                                <td>{{$user->name}}</td>
+                                @break
+                            @endif
                         @endif
+                        
                     @endforeach
 
                     <td>             
@@ -50,7 +57,7 @@
                         </form>
                     </td>
                 </tr>
-            
+                @endif
             @endforeach
         
        

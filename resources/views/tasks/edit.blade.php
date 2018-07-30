@@ -3,6 +3,10 @@
 @section('content')
 
 <div class="container">
+        <div class="row">
+            <div class="col-md-8"></div>
+            <a href="/home" class="btn btn-primary">Back</a>
+        </div>
         <h2 class="text-center">Edit task</h2><br/>
         <form method="post" action="/edit-task/{{$id}}" >
           {{csrf_field()}}
@@ -11,7 +15,7 @@
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
               <label for="name">Name task:</label>
-              <input type="text" class="form-control" name="name" required>
+              <input type="text" class="form-control" name="name" value="{{$task->name}}" required>
             </div>
           </div>
 
@@ -19,7 +23,7 @@
             <div class="col-md-4"></div>
               <div class="form-group col-md-4">
                 <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" required>
+                <input type="text" class="form-control" name="description"  value="{{$task->description}}" required>
               </div>
             </div>
 
@@ -34,8 +38,16 @@
           <div class="row">
             <div class="col-md-4"></div>
             <div class="form-group col-md-4">
-              <label for="assign">Assign:</label> 
-              <input type="text" name="assign" class="form-control" required>   
+              <label for="assign">Assign:</label>  
+              <select name="assign" class="form-control">
+                <option value="{{auth()->user()->id}}"> You </option>
+                @foreach($users as $user)
+                  @if($user->id !== auth()->user()->id)
+                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    @break
+                  @endif
+                @endforeach
+              </select>
            </div>
           </div>
 

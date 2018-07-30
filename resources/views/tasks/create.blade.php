@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="container">
+        <div class="row">
+            <div class="col-md-8"></div>
+            <a href="/home" class="btn btn-primary">Back</a>
+        </div>
+
         <h2 class="text-center">Create task</h2><br/>
         <form method="post" action="/add-task">
           {{csrf_field()}}
@@ -36,8 +41,11 @@
             <div class="form-group col-md-4">
               <label for="assign">Assign:</label> 
               <select name="assign" class="form-control">
+                  <option value="{{auth()->user()->id}}"> You </option>
                   @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    @if($user->id !== auth()->user()->id)
+                      <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endif
                   @endforeach
               </select>   
            </div>
