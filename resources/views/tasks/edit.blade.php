@@ -30,8 +30,8 @@
           <div class="row">
             <div class="col-md-4"></div>
               <div class="form-group col-md-4">
-                <input type="radio" name="status" value="1" >Done <br>
-                <input type="radio" name="status" value="0" checked>Incomplete <br>
+                <input type="radio" name="status" value="1" {{$task->status ? 'checked' : '' }} >Done <br>
+                <input type="radio" name="status" value="0" {{$task->status ===0 ? 'checked' : ''}}>Incomplete <br>
               </div>
             </div>
 
@@ -40,10 +40,11 @@
             <div class="form-group col-md-4">
               <label for="assign">Assign:</label>  
               <select name="assign" class="form-control">
-                <option value="{{auth()->user()->id}}"> You </option>
+                <option value="{{auth()->user()->id}}" {{auth()->user()->id === $task->user_id ? 'selected' : ''}} > You </option>
+
                 @foreach($users as $user)
                   @if($user->id !== auth()->user()->id)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    <option value="{{$user->id}}" {{$user->id === $task->user_id ? 'selected' : ''}}>{{$user->name}}</option>
                     @break
                   @endif
                 @endforeach
