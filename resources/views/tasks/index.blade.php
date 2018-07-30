@@ -25,7 +25,12 @@
                     <td>{{++$i}}</td>
                     <td>{{$value->name}}</td>
                     <td>{{$value->description}}</td>
-                    <td>{{$value->status}}</td>
+                    @if($value->status)
+                        <td>Done</td>
+                    @else
+                        <td>Incomplete</td>
+                    @endif
+                    
                     @foreach($users as $user)
                         @if($user->id === $value->user_id)
                             @if($value->user_id === auth()->user()->id)
